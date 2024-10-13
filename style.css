@@ -16,7 +16,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     justify-content: end;
     align-content: end;
-    color: white;
+    color: rgb(238, 238, 238);
 }
 
 #button-container {
@@ -29,10 +29,24 @@ body {
     border-style: none;
 }
 
-.number-button {
+.calculator-button {
     font-size: 20px;
     border-style: solid;
     border-width: .1px;
+    transition: background-color .01s ease;
+}
+
+.calculator-button:active {
+    background-color: lightgray;
+}
+
+.operator-button:active {
+    background-color: lightgray;
+}
+
+
+.zero-button {
+    grid-column: span 2;
 }
 
 .operator-button {
