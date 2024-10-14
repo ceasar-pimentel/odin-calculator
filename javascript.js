@@ -36,6 +36,8 @@ class Calculator {
         this.state = state;
         this.#initializeNumberButtons();
         this.initializeOperatorButtons();
+        this.initializeEqualButton();
+        this.initializeAllClearButton();
     }
 
     #initializeNumberButtons() {
@@ -54,10 +56,36 @@ class Calculator {
         })
     }
 
+    initializeEqualButton() {
+        let equalButton = document.querySelector(".equal-button");
+        equalButton.addEventListener("click", (e) => { this.pressEqual()});
+    }
+
+    initializeAllClearButton() {
+        let allClearButton = document.querySelector(".all-clear-button");
+        allClearButton.addEventListener("click", (e)=> {this.pressAllClear()});
+    }
+
+    pressEqual() {
+        if (this.state.memory != null && this.state.memory.length !== 0
+             && this.state.display != null && this.state.display.length !== 0) {
+                this.state.display = this.state.operator(this.state.memory, this.state.display)
+                this.state.memory = null;
+                this.state.operator = null;
+             }
+    }
+
+    pressAllClear() {
+        this.state.display = null;
+        this.state.operator = null;
+        this.state.memory = null;
+        this.state.isPreviousOperationOperator = false;
+    }
+
     pressNumber(button) {
         // state will be managed by the calculator class 
 
-        if (this.state.action != null && this.state.isPreviousOperationOperator)  {
+        if (this.state.action != null && this.state.isPreviousOperationOperator) {
             this.state.isPreviousOperationOperator = false;
             this.state.display = button.number;
         }
